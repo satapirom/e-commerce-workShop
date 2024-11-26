@@ -7,6 +7,7 @@ exports.authCheck = async (req, res, next) => {
         if (!headerToken) {
             return res.status(401).json({ message: 'Token not found' })
         }
+
         const token = headerToken.split(' ')[1]
 
         const decode = jwt.verify(token, process.env.JWT_SECRET)
@@ -45,6 +46,7 @@ exports.adminCheck = async (req, res, next) => {
 
         console.log(adminUser);
         next();
+
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Admin check failed" });
